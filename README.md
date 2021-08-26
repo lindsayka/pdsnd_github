@@ -5,7 +5,7 @@ Python Bikeshare project was created on 26 June 2021. It was uploaded to GitHub 
 Bikeshare
 
 ### Description
-This project was created to access and filter bikeshare data collected in three citie (Chicago, New York, and Washington DC) through user input.
+This project was created to access and filter bikeshare data collected in three cities (Chicago, New York, and Washington DC) through user input. User can filter by month (January through June or all) and day of the week. Data output includes most frequent times of travel, trip duration, average travel time, gender and birth data. Raw data is also available to the user.
 
 ### Files used
 Data files included:
