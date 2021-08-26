@@ -10,14 +10,18 @@ This project was created to access and filter bikeshare data collected in three 
 ### Files used
 Data files included:
   chicago.csv
+
   new_york_city.csv
+
   washington.csv
 
 Program file:
+
   bikeshare.py
 
 ### Credits
 Guidance was found at the following addresses:
+
 https://docs.python.org/3/library/stdtypes.html#dict-views
 
 https://stackoverflow.com/questions/55719762/how-to-calculate-mode-over-two-columns-in-a-python-dataframe
