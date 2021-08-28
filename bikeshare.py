@@ -32,43 +32,34 @@ def get_filters():
     print('Hello! Let\'s explore some US bikeshare data!')
     # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
     city = input('Please select Chicago, New York City or Washington: ').lower()
-    
+
     while city not in CITY_DATA:
-        city = input('Please select Chicago, New York City or Washington: ').lower() 
-    
-    if city == 'chicago':
-        print('Thank you for your input! You have selected Chicago.')       
-    
-    if city == 'new york city':
-        print('Thank you for your input! You have selected New York City.')
-        
-    if city == 'new york':
-        print('Thank you for your input! You have selected New York City.')
-    
-    if city == 'washington':
-        print('Thank you for your input! You have selected Washington.')
+        city = input('Please select Chicago, New York City or Washington: ').lower()
+
+    if city in ['chicago', 'new york city', 'new york', 'washington']:
+        print ('Thank you for your input! You have selected ' + city.capitalize() + '.')
 
     # TO DO: get user input for month (all, january, february, ... , june)
     month = input('Please select a month or "all" for unfiltered data: ').lower()
-    
+
     while month not in MONTH_DATA:
         month = input('Sorry, we don\'t have data for that month, please select a month from January through June or "all": ').lower()
-        
+
     if month != 'all':
         print('Thank you, your data will come from ' + month.capitalize() + '.')
-        
+
     else:
         print('Thank you, your data will not be filtered by month.')
-        
+
     # TO DO: get user input for day of week (all, monday, tuesday, ... sunday)
     day = input('Please select a day of the week or type "all" for unfiltered data: ').lower()
-    
+
     while day not in DAY_DATA:
         day = input('Sorry, I don\'t recognize that day. Please select a day of the week (ex. Monday) or "all" for no filter: ').lower()
-        
+
     if day != 'all':
         print('Thank you, your data will come from ' + day.capitalize() + '.')
-        
+
     else:
         print('Thank you, your data will not be filtered by day.')
 
@@ -89,22 +80,22 @@ def load_data(city, month, day):
     """
     #load data file into a dataframe
     df = pd.read_csv(CITY_DATA[city])
-    
+
     #convert the 'Start Time' colume to datetime
     df['Start Time'] = pd.to_datetime(df['Start Time'])
-    
+
     #extract month & day of the week from 'Start Time' to cerate new columns
     df['month'] = df['Start Time'].dt.month
     df['day_of_week'] = df['Start Time'].dt.weekday_name
-    
+
     #filter by month if applicable
     if month != 'all':
         #use index of months to get corresponding int
         month = MONTH_DATA.index(month) + 1
-        
+
         #filter by month to create new data frame
         df = df[df['month'] == month]
-        
+
     #filter by day of week if applicable
     if day != 'all':
         #filter by day of week to creat new dataframe
@@ -123,22 +114,22 @@ def time_stats(df, city):
     common_month = df['month'].mode()[0]
     if common_month == '1':
         print('The most common month in {} is January.'.format(city.capitalize()))
-        
+
     elif common_month == '2':
         print('The most common month in {} is February.'.format(city.capitalize()))
-        
+
     elif common_month == '3':
         print('The most common month in {} is March.'.format(city.capitalize()))
-        
+
     elif common_month == '4':
         print('The most common month in {} is May.'.format(city.capitalize()))
-        
+
     else:
         print('The most common month in {} is June.'.format(city.capitalize()))
 
     # TO DO: display the most common day of week
     common_day = df['day_of_week'].mode()[0]
-    
+
     print('The most common day with your chosen filters is ' + common_day.capitalize() + '.')
 
     #Extract hour from 'Start Time' column to create an hour colume
@@ -210,17 +201,17 @@ def user_stats(df, city):
     # TO DO: Display counts of gender
     if city == 'washington':
         print('Washington does not collect gender data.')
-    
+
     else:
         user_gender = df['Gender'].value_counts()
         print('User genders for your filters are as follows: \n')
         print(user_gender)
-    
+
 
     # TO DO: Display earliest, most recent, and most common year of birth
     if city == 'washington':
         print('Washington does not collect birth year data.')
-    
+
     else:
         user_birth_early = min(df['Birth Year'])
         print('Earliest birth year is: {}'.format(user_birth_early))
@@ -242,19 +233,19 @@ def main():
         station_stats(df)
         trip_duration_stats(df)
         user_stats(df, city)
-        
+
         view_data = input('\nWould you like to view 5 rows of individual trip data with your filters? Enter yes or no: ').lower()
         start_loc = 0
-        
+
         while view_data != 'no':
             if (view_data != 'yes'):
                 view_data = input('Sorry, I don\'t recognize your answer. Do you wish to see the next five 5 rows of individual trip data with your filters? Enter yes or no: ').lower()
-        
+
             if (view_data == 'yes'):
                 print(df.iloc[start_loc:start_loc+5])
                 start_loc += 5
                 view_data = input('Do you wish to see the next five 5 rows of individual trip data with your filters? Enter yes or no: ').lower()
-        
+
 
         restart = input('Would you like to restart? Enter yes or no: ')
         if restart.lower() != 'yes':
