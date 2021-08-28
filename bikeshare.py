@@ -237,6 +237,11 @@ def main():
         view_data = input('\nWould you like to view 5 rows of individual trip data with your filters? Enter yes or no: ').lower()
         start_loc = 0
 
+        if view_data.lower() == 'y':
+            view_data = 'yes'
+        if view_data.lower() == 'n':
+            view_data = 'no'
+
         while view_data != 'no':
             if (view_data != 'yes'):
                 view_data = input('Sorry, I don\'t recognize your answer. Do you wish to see the next five 5 rows of individual trip data with your filters? Enter yes or no: ').lower()
@@ -246,7 +251,17 @@ def main():
                 start_loc += 5
                 view_data = input('Do you wish to see the next five 5 rows of individual trip data with your filters? Enter yes or no: ').lower()
 
+            if view_data.lower() == 'y':
+                view_data = 'yes'
+            if view_data.lower() == 'n':
+                view_data = 'no'
+
         restart = input('Would you like to restart? Enter yes or no: ')
+
+        if restart.lower() == 'y':
+            restart = 'yes'
+        if restart.lower() == 'n':
+            restart = 'no'
 
         if restart.lower() != 'yes':
             break
